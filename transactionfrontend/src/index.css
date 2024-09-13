@@ -1,0 +1,217 @@
+
+
+.dashboard {
+  margin: auto;
+  height: 100%;
+  font-family: monospace;
+}
+
+.dashboardTitle {
+  margin-top: 0px;
+  padding: 30px;
+  background-color: #7341a0;
+  color: white; 
+  font-weight: bold;
+}
+
+/* .search-bar {
+  
+  display: flex;
+  justify-content: space-evenly;
+
+  margin-bottom: 20px;
+}
+
+.search-bar div {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+} */
+
+.transaction-table table {
+  width: 100%;
+  padding: 20px;
+  align-items: center;
+}
+
+.transaction-table th,
+.transaction-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.transaction-table th {
+  background-color: #7341a0;
+  color: white;
+}
+.transaction-table tbody .table-input:hover {
+  cursor: pointer;
+  transform: translateY(-3px); 
+  box-shadow: 0px 4px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination li {
+  display: inline;
+  margin-right: 5px;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #007bff;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+}
+
+.pagination a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.submit-button {
+  background-color: #7341a0;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  width: 10%;
+  height: 50%;
+  padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.submit-button-disabled {
+  background-color: #535353;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  width: 10%;
+  height: 50%;
+  padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:active {
+  transform: scale(0.95);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+
+.transaction-details {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-card {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-card p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.transaction-card p strong {
+  color: #7341a0;
+}
+
+h2 {
+  color: #7341a0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.transaction-details {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-card {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.back-button {
+  background-color: #7341a0;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background-color: #5e2e8e;
+  transform: translateY(-2px);
+}
+
+/* SearchBar.css */
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.search-bar div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.search-bar label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.search-bar input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-bar input[type="date"]:focus {
+  border-color: #7341a0;
+  box-shadow: 0 0 0 2px #39155883;
+  outline: none;
+}
+
+
+
+
+
+
