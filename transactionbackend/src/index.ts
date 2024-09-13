@@ -5,6 +5,9 @@ import { TransactionRouter } from "./api/routes/Transaction.route";
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import path from 'path'; // pour gérer les chemins de fichiers
+import * as dotenv from 'dotenv'; // Import dotenv pour charger les variables d'environnement
+
+dotenv.config(); // Charger
 
 const SocketIo = require('socket.io')
 const http = require("http");
@@ -20,7 +23,7 @@ const swaggerOptions = {
       },
       servers: [
         {
-          url: 'http://localhost:8000',
+          url: 'http://localhost:8000/api',
         },
       ],
     },

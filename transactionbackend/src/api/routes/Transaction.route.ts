@@ -7,24 +7,59 @@ export const TransactionRouter = Router(io);
 
 /**
  * @swagger
- * /api/transactions:
+ * /:
  *   get:
- *     summary: Récupérer toutes les transactions
+ *     summary: Retrieve a list of Transaction
+ *     description: Retrieve a list of Transaction from Database.
  *     responses:
  *       200:
- *         description: Succès
+ *         description: A list of transactions .
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 success:
- *                   type: boolean
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Transaction'
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         description: The transaction ID.
+ *                         example: 3ae5d180-0f80-4683-b6a2-34b7519ead51
+ *                       value:
+ *                         type: integer
+ *                         description: The transaction value.
+ *                         example: 123452
+ *                       sender:
+ *                         type: string
+ *                         description: The transaction sender.
+ *                         example: john doe
+ *                       receiver:
+ *                         type: string
+ *                         description: The transaction receiver.
+ *                         example: sam doe
+ *                       timestamp:
+ *                         type: integer
+ *                         description: The transaction timestamp.
+ *                         example: 164432545278
+ *                       confirmed:
+ *                         type: boolean
+ *                         description: The transaction status.
+ *                         example: 1
+ *                       createdAt:
+ *                         type: string
+ *                         description: Creation date.
+ *                         example: 2022-11-11
+ *                       updatedAt:
+ *                         type: string
+ *                         description: Last modification date.
+ *                         example: 2022-11-14
  */
+
+//get all transactions
+
 TransactionRouter.get("/", async (req: Request, res: Response) => {
     TransactionController.GetAllTransaction()
         .then((result) => {
@@ -43,21 +78,82 @@ TransactionRouter.get("/", async (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /api/createTransaction:
+ * /createTransaction:
  *   post:
- *     summary: Créer une nouvelle transaction
+ *     summary: Create a transaction.
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Transaction'
+ *             type: object
+ *             properties:
+ *               value:
+ *                 type: integer
+ *                 description: The transaction value.
+ *                 example: 123452
+ *               sender:
+ *                 type: string
+ *                 description: The transaction sender.
+ *                 example: john doe
+ *               receiver:
+ *                 type: string
+ *                 description: The transaction receiver.
+ *                 example: sam doe
+ *               timestamp:
+ *                 type: integer
+ *                 description: The transaction timestamp.
+ *                 example: 164432545278
+ *               confirmed: 
+ *                 type: boolean
+ *                 description: The transaction confirmation status
+ *                 example: false
  *     responses:
  *       200:
- *         description: Transaction créée avec succès
- *       500:
- *         description: Erreur serveur
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                    id:
+ *                      type: string
+ *                      description: The transaction ID.
+ *                      example: 3ae5d180-0f80-4683-b6a2-34b7519ead51
+ *                    value:
+ *                      type: integer
+ *                      description: The transaction value.
+ *                      example: 123452
+ *                    sender:
+ *                      type: string
+ *                      description: The transaction sender.
+ *                      example: john doe
+ *                    receiver:
+ *                      type: string
+ *                      description: The transaction receiver.
+ *                      example: sam doe
+ *                    timestamp:
+ *                      type: integer
+ *                      description: The transaction timestamp.
+ *                      example: 164432545278
+ *                    confirmed:
+ *                      type: boolean
+ *                      description: The transaction status.
+ *                      example: 1
+ *                    createdAt:
+ *                      type: string
+ *                      description: Creation date.
+ *                      example: 2022-11-11
+ *                    updatedAt:
+ *                      type: string
+ *                      description: Last modification date.
+ *                      example: 2022-11-14
  */
+//create transaction
+
 TransactionRouter.post("/createTransaction", async (req: Request, res: Response) => {
     const transaction = req.body;
     if (!transaction) {
@@ -84,28 +180,90 @@ TransactionRouter.post("/createTransaction", async (req: Request, res: Response)
 
 /**
  * @swagger
- * /api/updateTransaction:
+ * /updateTransaction:
  *   put:
- *     summary: Mettre à jour une transaction
+ *     summary: Update a transaction.
+ *     description: Edit Transaction value on database
  *     parameters:
- *       - in: query
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: ID de la transaction
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: String ID of the Transaction to update.
+ *        schema:
+ *          type: string
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Transaction'
+ *             type: object
+ *             properties:
+ *               value:
+ *                 type: integer
+ *                 description: The transaction value.
+ *                 example: 123452
+ *               sender:
+ *                 type: string
+ *                 description: The transaction sender.
+ *                 example: john doe
+ *               receiver:
+ *                 type: string
+ *                 description: The transaction receiver.
+ *                 example: sam doe
+ *               timestamp:
+ *                 type: integer
+ *                 description: The transaction timestamp.
+ *                 example: 164432545278
+ *               confirmed: 
+ *                  type: boolean
+ *                  description: The transaction confirmation status
+ *                  example: false
  *     responses:
- *       200:
- *         description: Transaction mise à jour avec succès
- *       500:
- *         description: Erreur serveur
+ *       201:
+ *         description: Updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                    id:
+ *                      type: string
+ *                      description: The transaction ID.
+ *                      example: 3ae5d180-0f80-4683-b6a2-34b7519ead51
+ *                    value:
+ *                      type: integer
+ *                      description: The transaction value.
+ *                      example: 123452
+ *                    sender:
+ *                      type: string
+ *                      description: The transaction sender.
+ *                      example: john doe
+ *                    receiver:
+ *                      type: string
+ *                      description: The transaction receiver.
+ *                      example: sam doe
+ *                    timestamp:
+ *                      type: integer
+ *                      description: The transaction timestamp.
+ *                      example: 164432545278
+ *                    confirmed:
+ *                      type: boolean
+ *                      description: The transaction status.
+ *                      example: 1
+ *                    createdAt:
+ *                      type: string
+ *                      description: Creation date.
+ *                      example: 2022-11-11
+ *                    updatedAt:
+ *                      type: string
+ *                      description: Last modification date.
+ *                      example: 2022-11-14
  */
+
+//update transaction
 TransactionRouter.put('/updateTransaction', async (req: Request, res: Response) => {
     const id = String(req.query.id);
     const transaction = req.body;
@@ -133,22 +291,64 @@ TransactionRouter.put('/updateTransaction', async (req: Request, res: Response) 
 
 /**
  * @swagger
- * /api/transactionDetails:
+ * /transactionDetails:
  *   get:
- *     summary: Obtenir les détails d'une transaction
+ *     summary: Retrieve a transaction.
+ *     description: Retrieve a single  transaction.
  *     parameters:
- *       - in: query
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: ID de la transaction
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: String ID of the Transaction to retrieve.
+ *        schema:
+ *          type: string
  *     responses:
  *       200:
- *         description: Détails de la transaction
- *       500:
- *         description: Erreur serveur
+ *         description: A single transaction.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         description: The transaction ID.
+ *                         example: 3ae5d180-0f80-4683-b6a2-34b7519ead51
+ *                       value:
+ *                         type: integer
+ *                         description: The transaction value.
+ *                         example: 123452
+ *                       sender:
+ *                         type: string
+ *                         description: The transaction sender.
+ *                         example: john doe
+ *                       receiver:
+ *                         type: string
+ *                         description: The transaction receiver.
+ *                         example: sam doe
+ *                       timestamp:
+ *                         type: integer
+ *                         description: The transaction timestamp.
+ *                         example: 164432545278
+ *                       confirmed:
+ *                         type: boolean
+ *                         description: The transaction status.
+ *                         example: 1
+ *                       createdAt:
+ *                         type: string
+ *                         description: Creation date.
+ *                         example: 2022-11-11
+ *                       updatedAt:
+ *                         type: string
+ *                         description: Last modification date.
+ *                         example: 2022-11-14
  */
+//get details of a transaction by ID
 TransactionRouter.get("/transactionDetails", async (req: Request, res: Response) => {
     const id = req.query.id;
     if (!id) {
@@ -174,9 +374,10 @@ TransactionRouter.get("/transactionDetails", async (req: Request, res: Response)
 
 /**
  * @swagger
- * /api/getTransactionByRange:
+ * /getTransactionByRange:
  *   post:
- *     summary: Obtenir des transactions par plage de dates
+ *     summary: Retrieve a range of Transaction
+ *     description: Retrieve a range of Transaction from Database.
  *     requestBody:
  *       required: true
  *       content:
@@ -186,14 +387,61 @@ TransactionRouter.get("/transactionDetails", async (req: Request, res: Response)
  *             properties:
  *               startDate:
  *                 type: string
+ *                 description: The transaction range Startdate.
+ *                 example: 2024-09-09
  *               endDate:
  *                 type: string
+ *                 description: The transaction range Enddate.
+ *                 example: 2024-10-10
+ *               
  *     responses:
  *       200:
- *         description: Transactions récupérées avec succès
- *       500:
- *         description: Erreur serveur
+ *         description: A rangeof transactions .
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         description: The transaction ID.
+ *                         example: 3ae5d180-0f80-4683-b6a2-34b7519ead51
+ *                       value:
+ *                         type: integer
+ *                         description: The transaction value.
+ *                         example: 123452
+ *                       sender:
+ *                         type: string
+ *                         description: The transaction sender.
+ *                         example: john doe
+ *                       receiver:
+ *                         type: string
+ *                         description: The transaction receiver.
+ *                         example: sam doe
+ *                       timestamp:
+ *                         type: integer
+ *                         description: The transaction timestamp.
+ *                         example: 164432545278
+ *                       confirmed:
+ *                         type: boolean
+ *                         description: The transaction status.
+ *                         example: 1
+ *                       createdAt:
+ *                         type: string
+ *                         description: Creation date.
+ *                         example: 2024-09-09
+ *                       updatedAt:
+ *                         type: string
+ *                         description: Last modification date.
+ *                         example: 2024-10-10
  */
+
+//get range of transactions
 TransactionRouter.post("/getTransactionByRange", async (req: Request, res: Response) => {
     const { startDate, endDate } = req.body;
     if (!startDate || !endDate) {
