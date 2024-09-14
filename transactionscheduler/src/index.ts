@@ -44,7 +44,6 @@ export const ScheduleCreateTransaction = () =>{
             const endTime = new Date(startTime.getTime() + 1000);
             const scheduleUpdate = schedule.scheduleJob({ start: startTime, end: endTime, rule: '*/1 * * * * *' }, function(){
                 const payload = {confirmed: true}
-                console.log('result :' ,result)
                 updateTransaction(result.data.id, payload )
                 .then((result: any) =>{
                     console.log('updated')

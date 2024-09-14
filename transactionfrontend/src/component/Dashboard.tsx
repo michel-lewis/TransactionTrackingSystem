@@ -46,7 +46,6 @@ const Dashboard: React.FC = () => {
     });
 
     socket.on('createTransaction', (data: any) => {
-      console.log('connexion creation');
       // Update the transactions by appending the new transaction
       setTransactions(prevTransactions => [data, ...prevTransactions]);
     });
@@ -71,11 +70,9 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const handleSearch = async (startDate: string, endDate: string) => {
-    console.log("startDATE ", startDate, endDate);
     setIsLoading(true);
     const transaction = await fetchTransactionByRange(startDate, endDate);
     setIsLoading(false);
-    console.log("transaction ", transaction);
 
     setTransactions(transaction);
   };

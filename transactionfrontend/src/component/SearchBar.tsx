@@ -34,7 +34,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           onChange={(e) => setEndDate(e.target.value)}
         />
       </div>
-      <button className={ startDate !="" && endDate !="" ? "submit-button" :"submit-button-disabled"} type="submit" disabled ={!startDate || !endDate }>Search</button>
+      <button className= "submit-button" type="submit" >Search</button>
     </form>
   );
 };

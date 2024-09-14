@@ -445,9 +445,18 @@ TransactionRouter.get("/transactionDetails", async (req: Request, res: Response)
 TransactionRouter.post("/getTransactionByRange", async (req: Request, res: Response) => {
     const { startDate, endDate } = req.body;
     if (!startDate || !endDate) {
-        return res.status(500).send({
-            success: false,
-            error: 'Missing value'
+        TransactionController.GetAllTransaction()
+        .then((result) => {
+            return res.status(200).send({
+                success: true,
+                data: result
+            });
+        })
+        .catch((err) => {
+            return res.status(500).send({
+                success: false,
+                error: err
+            });
         });
     }
     TransactionController.GetTransactionByRange(startDate, endDate)
