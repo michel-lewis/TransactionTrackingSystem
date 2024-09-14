@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 
 type TransactionTableProps = {
   transactions: Transaction[];
-  socketTransaction: Transaction | undefined;
   onTransactionClick: (transaction: Transaction) => void;
   openModal: (open: boolean) => void;
   isLoadingSocketTransaction: boolean;
@@ -17,8 +16,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   transactions,
   onTransactionClick,
   openModal,
-  socketTransaction,
-  isLoadingSocketTransaction,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(20);

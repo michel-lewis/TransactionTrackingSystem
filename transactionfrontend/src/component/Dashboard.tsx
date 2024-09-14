@@ -23,7 +23,6 @@ const Dashboard: React.FC = () => {
   const [selectedTransaction, setSelectedTransaction] = useState<
     Transaction | undefined
   >();
-  const [socketTransaction, setSocketTransactions] = useState<Transaction | undefined>();
   const [openModal, setOpenModal] = React.useState(false);
 
   const fetchTransactions = async () => {
@@ -91,7 +90,6 @@ const Dashboard: React.FC = () => {
       ) : (
         <TransactionTable
           transactions={transactions}
-          socketTransaction={socketTransaction}
           onTransactionClick={setSelectedTransaction}
           openModal={setOpenModal}
           isLoadingSocketTransaction={isLoadingSocketTransaction}
