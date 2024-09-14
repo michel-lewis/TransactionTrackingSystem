@@ -5,6 +5,7 @@
     "node-schedule": "^2.1.1"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/node-schedule": "^2.1.7",
     "@types/socket.io": "^3.0.2",
     "nodemon": "^3.1.4",

@@ -23,7 +23,7 @@ const swaggerOptions = {
       },
       servers: [
         {
-          url: 'http://localhost:8000/api',
+          url: process.env.DB_SERVER,
         },
       ],
     },
@@ -40,6 +40,7 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions);
 
 const app = express();
 const port = process.env.PORT || 8000;
+const HOST = process.env.DB_SERVER
 const server = http.createServer(app)
 app.use(cors());
 app.use(express.json());
@@ -68,7 +69,7 @@ const start = async ():Promise<void> =>{
        const sync =  await connection.sync();
         console.log(sync)
         server.listen(port, () => {
-            console.log(`Server running at http://localhost:${port}`);
+            console.log(`Server running at http://${HOST}:${port}`);
           });
           
     } catch (error) {

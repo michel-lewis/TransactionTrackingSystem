@@ -1,9 +1,7 @@
 import axios, {AxiosResponse,AxiosError } from 'axios'
-const baseUrl: string = (import.meta.env.VITE_APP_API_BASE_URL)as string ;
+let baseUrl: string = (import.meta.env.VITE_APP_API_BASE_URL)as string ;
 
-if (!baseUrl) {
-    throw new Error("REACT_APP_BASE_URL is not defined in .env");
-}
+baseUrl =`${baseUrl}/api`
 export type Transaction  = {
     id: string;
     value: number;

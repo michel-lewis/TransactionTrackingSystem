@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Pagination from "./Pagination";
 import { Transaction } from "../service/api";
 import { formatDate } from "../utils/formatData";
-import FolderOff from "@mui/icons-material/FolderOff"; 
+import FolderOff from "@mui/icons-material/FolderOff";
 import Box from "@mui/material/Box";
 
 type TransactionTableProps = {
@@ -10,9 +10,16 @@ type TransactionTableProps = {
   socketTransaction: Transaction | undefined;
   onTransactionClick: (transaction: Transaction) => void;
   openModal: (open: boolean) => void;
+  isLoadingSocketTransaction: boolean;
 };
 
-const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onTransactionClick, openModal, socketTransaction }) => {
+const TransactionTable: React.FC<TransactionTableProps> = ({
+  transactions,
+  onTransactionClick,
+  openModal,
+  socketTransaction,
+  isLoadingSocketTransaction,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(20);
 
@@ -42,7 +49,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onTra
             <th>Updated Date</th>
           </tr>
         </thead>
-        
+
         <tbody>
           {currentItems.length < 1 ? (
             <tr>
@@ -53,7 +60,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onTra
                     justifyContent: "center",
                     alignItems: "center",
                     height: "200px", // Adjust height for centering vertically
-                    width: "100%",   // Ensure it takes the full width of the table
+                    width: "100%", // Ensure it takes the full width of the table
                   }}
                 >
                   <FolderOff
@@ -64,20 +71,31 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onTra
             </tr>
           ) : (
             currentItems.map((transaction) => (
-              <tr key={transaction.id} onClick={() => handleTransactionSelected(transaction)} className="table-input">
+              <tr
+                key={transaction.id}
+                onClick={() => handleTransactionSelected(transaction)}
+                className="table-input"
+              >
                 <td>{transaction.id}</td>
                 <td>{transaction.sender}</td>
                 <td>{transaction.receiver}</td>
                 <td>{transaction.value}</td>
-                {
-                   !!socketTransaction ? 
-                   <td>{socketTransaction.confirmed ? "Yes" : "No"}</td>
-                    :
-                    <td>{transaction.confirmed ? "Yes" : "No"}</td>
-                }
+                {isLoadingSocketTransaction == true ? (
+                  <td>{transaction.confirmed ? "Yes" : "No"}</td>
+                ) : (
+                  <td>{!!socketTransaction && socketTransaction.confirmed ? "Yes" : "No"}</td>
+                )}
                 <td>{transaction.timestamp}</td>
-                <td>{transaction.createdAt ? formatDate(transaction.createdAt) : ""}</td>
-                <td>{transaction.updatedAt ? formatDate(transaction.updatedAt) : ""}</td>
+                <td>
+                  {transaction.createdAt
+                    ? formatDate(transaction.createdAt)
+                    : ""}
+                </td>
+                <td>
+                  {transaction.updatedAt
+                    ? formatDate(transaction.updatedAt)
+                    : ""}
+                </td>
               </tr>
             ))
           )}

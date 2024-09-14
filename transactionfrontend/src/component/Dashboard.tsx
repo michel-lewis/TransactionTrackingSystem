@@ -15,10 +15,11 @@ import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import TransactionDetails from "./TransactionDetails";
 import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient('http://localhost:8000')
+const socket = socketIOClient(import.meta.env.VITE_APP_API_BASE_URL)
 const Dashboard: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingSocketTransaction , setIsLoadingSocketTransaction ] = useState<boolean>(false);
   const [selectedTransaction, setSelectedTransaction] = useState<
     Transaction | undefined
   >();
@@ -50,7 +51,10 @@ const Dashboard: React.FC = () => {
     });
 
     socket.on('updateTransaction', (data: any) => {
+      setIsLoadingSocketTransaction(true);
       setSocketTransactions(data);
+      setIsLoadingSocketTransaction(false);
+
     });
 
     return () => {
@@ -83,6 +87,7 @@ const Dashboard: React.FC = () => {
           socketTransaction={socketTransaction}
           onTransactionClick={setSelectedTransaction}
           openModal={setOpenModal}
+          isLoadingSocketTransaction={isLoadingSocketTransaction}
         />
       )}
 

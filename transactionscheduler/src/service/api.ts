@@ -1,5 +1,7 @@
 const axios = require("axios");
-const BaseUrl = "http://localhost:8000/api";
+import * as dotenv from 'dotenv';
+
+dotenv.config(); 
 
 type Transaction = {
   value: number;
@@ -8,7 +10,7 @@ type Transaction = {
   confirmed: boolean;
   timestamp: number;
 };
-
+const BaseUrl = process.env.API_BASE_URL
 export const createTransaction = (payload: Transaction): Promise<any> => {
   return new Promise((resolved, reject) => {
     axios
@@ -32,7 +34,7 @@ export const updateTransaction = (
     axios
       .put(`${BaseUrl}/updateTransaction?id=${encodeURIComponent(id)}`, payload)
       .then((result: any) => {
-        console.log("result obtenu ", result);
+        console.log("result obtenu ", result.data);
         resolved(result.data);
       })
       .catch((err: any) => {
