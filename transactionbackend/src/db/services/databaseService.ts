@@ -38,7 +38,6 @@ export const GetByRange = async (startDatePayload: string , endDatePayload: stri
     let startDate = new Date(startDatePayload);
     let endDate= new Date(endDatePayload);
     let isMostRecent = compareIfFirstDateIsMostRecent(startDate, endDate);
-    console.log("is most recent ", isMostRecent, endDate, startDate)
     if(isMostRecent == false){
         let date = startDate;
         startDate = endDate;

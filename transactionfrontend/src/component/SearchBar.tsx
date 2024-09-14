@@ -11,7 +11,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(startDate, endDate);
-    console.log("date ", startDate, endDate )
   };
 
 

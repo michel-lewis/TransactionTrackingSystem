@@ -28,7 +28,6 @@ export const fetchTransaction = async ():Promise<Transaction[] | undefined>=>{
 export const fetchTransationDetails = async (id: string ): Promise<Transaction | undefined> =>{
     try{
         const res: AxiosResponse = await axios.get(`${baseUrl}/transactionDetails?id=${id}`)
-        console.log("res.data", res.data.data)
         return res.data.data
 
     }
@@ -42,12 +41,10 @@ export const fetchTransationDetails = async (id: string ): Promise<Transaction |
 
 export const fetchTransactionByRange = async (startDate: string, endDate: string): Promise<any> => {
     try {
-        console.log("tryinng ")
         const res: AxiosResponse = await axios.post(`${baseUrl}/getTransactionByRange`, {
             startDate,
             endDate
         });
-        console.log("res.data", res.data.data);
         return res.data.data;
     } catch (err: AxiosError | any) {
         console.log(err.message);

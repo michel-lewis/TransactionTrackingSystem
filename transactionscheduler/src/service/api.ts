@@ -16,7 +16,6 @@ export const createTransaction = (payload: Transaction): Promise<any> => {
     axios
       .post(`${BaseUrl}/createTransaction`, payload)
       .then((result: any) => {
-        console.log(" resultat obtenu ", result.data);
         resolved(result.data);
       })
       .catch((err: any) => {
@@ -34,7 +33,6 @@ export const updateTransaction = (
     axios
       .put(`${BaseUrl}/updateTransaction?id=${encodeURIComponent(id)}`, payload)
       .then((result: any) => {
-        console.log("result obtenu ", result.data);
         resolved(result.data);
       })
       .catch((err: any) => {

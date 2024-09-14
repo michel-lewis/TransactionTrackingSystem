@@ -35,7 +35,6 @@ const Dashboard: React.FC = () => {
     } else {
       return [];
     }
-    console.log("Transact ", transact);
   };
 
   const handleCloseModal = () => setOpenModal(false);

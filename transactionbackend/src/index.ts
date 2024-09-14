@@ -49,7 +49,6 @@ app.use("/api", TransactionRouter)
 export const io = SocketIo(server, {cors: {origin: "*"}})
 
 io.on('connection', (socket: any) =>{
-    console.log("connection etablie ", socket.id)
     socket.on('createTransaction', (data: any) =>{
         socket.emit('creation de la transaction', data)
     })
@@ -67,9 +66,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 const start = async ():Promise<void> =>{
     try {
        const sync =  await connection.sync();
-        console.log(sync)
         server.listen(port, () => {
-            console.log(`Server running at http://${HOST}:${port}`);
+            console.log(`Server running at ${HOST}`);
           });
           
     } catch (error) {
