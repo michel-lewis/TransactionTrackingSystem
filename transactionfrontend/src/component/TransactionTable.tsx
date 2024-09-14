@@ -80,11 +80,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                 <td>{transaction.sender}</td>
                 <td>{transaction.receiver}</td>
                 <td>{transaction.value}</td>
-                {isLoadingSocketTransaction == true ? (
-                  <td>{transaction.confirmed ? "Yes" : "No"}</td>
-                ) : (
-                  <td>{!!socketTransaction && socketTransaction.confirmed ? "Yes" : "No"}</td>
-                )}
+                <td>{transaction.confirmed ? "Yes" : "No"}</td>
                 <td>{transaction.timestamp}</td>
                 <td>
                   {transaction.createdAt

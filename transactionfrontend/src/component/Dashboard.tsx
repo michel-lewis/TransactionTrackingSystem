@@ -29,7 +29,10 @@ const Dashboard: React.FC = () => {
   const fetchTransactions = async () => {
     const transact = await fetchTransaction();
     if (transact) {
-      setTransactions(transact);
+      const sortedTransactions = transact.sort((a, b) => 
+      new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
+    );
+      setTransactions(sortedTransactions);
     } else {
       return [];
     }
@@ -47,12 +50,16 @@ const Dashboard: React.FC = () => {
     socket.on('createTransaction', (data: any) => {
       console.log('connexion creation');
       // Update the transactions by appending the new transaction
-      setTransactions(prevTransactions => [...prevTransactions, data]);
+      setTransactions(prevTransactions => [data, ...prevTransactions]);
     });
 
     socket.on('updateTransaction', (data: any) => {
       setIsLoadingSocketTransaction(true);
-      setSocketTransactions(data);
+      setTransactions((prevTransactions) =>
+      prevTransactions.map((transaction) =>
+        transaction.id === data.id ? { ...transaction, confirmed: data.confirmed } : transaction
+      )
+    );
       setIsLoadingSocketTransaction(false);
 
     });
