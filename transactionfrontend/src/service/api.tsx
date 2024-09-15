@@ -1,7 +1,7 @@
 import axios, {AxiosResponse,AxiosError } from 'axios'
 let baseUrl: string = (import.meta.env.VITE_APP_API_BASE_URL)as string ;
 
-baseUrl =`${baseUrl}/api`
+baseUrl =`${baseUrl}`
 export type Transaction  = {
     id: string;
     value: number;
